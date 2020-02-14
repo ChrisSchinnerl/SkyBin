@@ -5,7 +5,8 @@
         <script type="text/javascript">
             function save() {
                 var snippet = document.getElementById("snippet").value;
-                var blob = new Blob(['<html><head><title>Welcome To Skybin</title><head><body><p>'+snippet+'</p></body></html>'], {type: 'text/html'});
+                snippet = snippet.replace(/\n/g, '<br/>');
+                var blob = new Blob(['<html><head><title>Welcome To Skybin</title><head><body>'+snippet+'</body></html>'], {type: 'text/html'});
 			    var formData = new FormData();
 			    formData.append('file', blob);
 			    fetch('https://siasky.net/api/skyfile?filename=skybin.html', {
