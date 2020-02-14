@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <title>Welcome to SkyBin</title>
+    <head>
+        <script type="text/javascript">
+            function save() {
+                var snippet = document.getElementById("snippet").value;
+                var blob = new Blob(['<html><head><title>Welcome To Skybin</title><head><body><p>'+snippet+'</p></body></html>'], {type: 'text/html'});
+			    var formData = new FormData();
+			    formData.append('file', blob);
+			    fetch('https://siasky.net/api/skyfile?filename=skybin.html', {
+			    		method: 'POST',
+			    		body: formData
+			    })
+			    .then((response) => response.json())
+			    .then((result) => {
+			    	alert(result.skylink);
+			    })
+			    .catch((error) => {
+			    	console.error('Error:', error);
+			    });
+            }
+        </script>
+
+        <h1>Welcome to SkyBin</h1>
+        <h2>Paste your snippet into the area below and hit "Save" to upload it to Skynet.</h2>
+    </head>
+    <body>
+        <textarea id="snippet" rows="20" cols="80" placeholder="Paste your snippet here"></textarea>
+        <br>
+        <input type="button" value="Save" onclick="save()"></input>
+</html>
